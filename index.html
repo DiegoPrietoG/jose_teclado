@@ -15,7 +15,7 @@
       display: grid;
       grid-template-columns: repeat(10, 1fr);
       gap: 10px;
-      max-width: 600px;
+      max-width: 1000px;
       margin: 50px auto;
     }
     .key {
@@ -28,13 +28,30 @@
       cursor: pointer;
       user-select: none;
     }
+    .delete-key {
+      display: flex; /* Activa flexbox */
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      padding: 60px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .delete-key img {
+      width: 200%; /* Ajusta el tamaño de la imagen */
+      height: auto; /* Mantiene la proporción de la imagen */
+    }
     .key:active {
       background-color: #ddd;
     }
   </style>
 </head>
 <body>
-  <h1>Teclado JOSE</h1>
+  <h1>Teclado Interactivo</h1>
   <div class="keyboard">
     <div class="key">Q</div>
     <div class="key">W</div>
@@ -63,13 +80,27 @@
     <div class="key">B</div>
     <div class="key">N</div>
     <div class="key">M</div>
+    <div class="delete-key">
+      <img src="delete.png" alt="Delete">
+    </div>
   </div>
+  <div id="word-display" style="margin-top: 20px; font-size: 24px; font-weight: bold;"></div>
   <script>
     const keys = document.querySelectorAll('.key');
+    const wordDisplay = document.getElementById('word-display');
+    let currentWord = '';
+
     keys.forEach(key => {
       key.addEventListener('click', () => {
-        alert(`You pressed: ${key.textContent}`);
+        currentWord += key.textContent;
+        wordDisplay.textContent = currentWord;
       });
+    });
+
+    const deleteKey = document.querySelector('.delete-key');
+    deleteKey.addEventListener('click', () => {
+      currentWord = currentWord.slice(0, -1); // Elimina el último carácter
+      wordDisplay.textContent = currentWord;
     });
   </script>
 </body>
