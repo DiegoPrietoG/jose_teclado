@@ -4,19 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teclado</title>
+  
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
+      display: flex; /* Activa flexbox */
+      flex-direction: column; /* Organiza los elementos en una columna */
+      justify-content: center; /* Centra verticalmente */
+      align-items: center; /* Centra horizontalmente */
+      height: 100vh; /* Ocupa toda la altura de la ventana */
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
     }
     .keyboard { 
       display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 10px;
-      max-width: 1000px;
-      margin: 50px auto;
+      grid-template-columns: repeat(auto-fit, 120px); /* Cambiado de 50px a 60px */
+      gap: 10px; /* Espacio entre las teclas */
+      max-width: 1400px;
+      margin: 0; /* Elimina márgenes adicionales */
     }
     .key {
       padding: 60px; /* Aumentado de 20px a 30px */
@@ -41,18 +47,39 @@
       cursor: pointer;
       user-select: none;
     }
-    .delete-key img {
-      width: 200%; /* Ajusta el tamaño de la imagen */
-      height: auto; /* Mantiene la proporción de la imagen */
+    .space-key {
+      grid-column: span 2; /* Ocupa dos columnas */
+      padding: 60px; /* Aumentado de 20px a 30px */
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
     }
     .key:active {
       background-color: #ddd;
+    }
+    #word-display {
+      display: block;
+      margin-top: 20px; /* Asegura espacio entre el teclado y el texto */
     }
   </style>
 </head>
 <body>
   <h1>Teclado JOSE</h1>
   <div class="keyboard">
+    <div class="key">1</div>
+    <div class="key">2</div>
+    <div class="key">3</div>
+    <div class="key">4</div>
+    <div class="key">5</div>
+    <div class="key">6</div>
+    <div class="key">7</div>
+    <div class="key">8</div>
+    <div class="key">9</div>
+    <div class="key">0</div>
     <div class="key">Q</div>
     <div class="key">W</div>
     <div class="key">E</div>
@@ -80,9 +107,8 @@
     <div class="key">B</div>
     <div class="key">N</div>
     <div class="key">M</div>
-    <div class="delete-key">
-      <img src="delete.png" alt="Delete">
-    </div>
+    <div class="delete-key">DEL</div>
+    <div class="space-key">SPACE</div>
   </div>
   <div id="word-display" style="margin-top: 20px; font-size: 24px; font-weight: bold;"></div>
   <script>
@@ -97,10 +123,35 @@
       });
     });
 
+    const spaceKey = document.querySelector('.space-key');
+    let spaceInterval;
+    
+    spaceKey.addEventListener('click', () => {
+      currentWord += ' '; // Agrega un espacio
+      wordDisplay.textContent = currentWord;
+    });
+
     const deleteKey = document.querySelector('.delete-key');
+    let deleteInterval;
+
     deleteKey.addEventListener('click', () => {
       currentWord = currentWord.slice(0, -1); // Elimina el último carácter
       wordDisplay.textContent = currentWord;
+    });
+
+    deleteKey.addEventListener('mousedown', () => {
+      deleteInterval = setInterval(() => {
+        currentWord = currentWord.slice(0, -1); // Elimina el último carácter
+        wordDisplay.textContent = currentWord;
+      }, 500); // Borra cada 50ms mientras se mantiene presionado
+    });
+
+    deleteKey.addEventListener('mouseup', () => {
+      clearInterval(deleteInterval); // Detiene el borrado al soltar el botón
+    });
+
+    deleteKey.addEventListener('mouseleave', () => {
+      clearInterval(deleteInterval); // Detiene el borrado si el cursor sale del botón
     });
   </script>
 </body>
