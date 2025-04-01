@@ -58,6 +58,18 @@
       cursor: pointer;
       user-select: none;
     }
+    .deleteall-key {
+      grid-column: span 3;
+      -ms-grid-column-align: center;
+      padding: 60px;
+      background-color: #f0f0f0;
+      border: solid 1px #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer; /* Estilo de cursor para indicar que es clickeable */
+      user-select: none; /* Evita la selección de texto al hacer clic */
+    }
     .key:active {
       background-color: #ddd;
     }
@@ -109,6 +121,7 @@
     <div class="key">M</div>
     <div class="delete-key">DEL</div>
     <div class="space-key">SPACE</div>
+    <div class="deleteall-key">BORRAR TODO</div>
   </div>
   <div id="word-display" style="margin-top: 20px; font-size: 24px; font-weight: bold;"></div>
   <script>
@@ -121,6 +134,12 @@
         currentWord += key.textContent;
         wordDisplay.textContent = currentWord;
       });
+    });
+
+    const deleteAllKey = document.querySelector('.deleteall-key');
+    deleteAllKey.addEventListener('click', () => {
+      currentWord = ''; // Borra todo el texto
+      wordDisplay.textContent = currentWord;
     });
 
     const spaceKey = document.querySelector('.space-key');
