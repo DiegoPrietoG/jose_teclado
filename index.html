@@ -33,6 +33,11 @@
       font-size: 18px;
       cursor: pointer;
       user-select: none;
+      transition: transform 0.1s ease, background-color 0.1s ease; /* Animación suave */
+    }
+    .key:active {
+      background-color: #ddd; /* Cambia el color al hacer clic */
+      transform: scale(0.95); /* Reduce ligeramente el tamaño */
     }
     .delete-key {
       display: flex; /* Activa flexbox */
@@ -46,6 +51,11 @@
       font-size: 18px;
       cursor: pointer;
       user-select: none;
+      transition: transform 0.1s ease, background-color 0.1s ease; /* Animación suave */
+    }
+    .delete-key:active {
+      background-color: #ddd; /* Cambia el color al hacer clic */
+      transform: scale(0.95); /* Reduce ligeramente el tamaño */
     }
     .space-key {
       grid-column: span 2; /* Ocupa dos columnas */
@@ -57,6 +67,11 @@
       font-size: 18px;
       cursor: pointer;
       user-select: none;
+      transition: transform 0.1s ease, background-color 0.1s ease; /* Animación suave */
+    }
+    .space-key:active {
+      background-color: #ddd; /* Cambia el color al hacer clic */
+      transform: scale(0.95); /* Reduce ligeramente el tamaño */
     }
     .deleteall-key {
       grid-column: span 3;
@@ -70,8 +85,9 @@
       cursor: pointer; /* Estilo de cursor para indicar que es clickeable */
       user-select: none; /* Evita la selección de texto al hacer clic */
     }
-    .key:active {
-      background-color: #ddd;
+    .deleteall-key:active {
+      background-color: #ddd; /* Cambia el color al hacer clic */
+      transform: scale(0.95); /* Reduce ligeramente el tamaño */
     }
     #word-display {
       display: block;
@@ -119,8 +135,8 @@
     <div class="key">B</div>
     <div class="key">N</div>
     <div class="key">M</div>
-    <div class="delete-key">DEL</div>
-    <div class="space-key">SPACE</div>
+    <div class="delete-key">BORRAR</div>
+    <div class="space-key">ESPACIO</div>
     <div class="deleteall-key">BORRAR TODO</div>
   </div>
   <div id="word-display" style="margin-top: 20px; font-size: 24px; font-weight: bold;"></div>
